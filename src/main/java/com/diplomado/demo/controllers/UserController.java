@@ -33,11 +33,7 @@ public class UserController {
     @GetMapping
     public List<?> getAllUsers(
             @RequestParam(required = false, defaultValue = "false") boolean detailed) {
-        if (detailed) {
-            return userService.getAllUsersDetailed();
-        } else {
-            return userService.getAllUsers();
-        }
+        return userService.getAllUsers(detailed);
     }
 
     @PostMapping

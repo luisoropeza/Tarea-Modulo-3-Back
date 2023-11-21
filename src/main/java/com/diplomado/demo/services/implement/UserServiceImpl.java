@@ -35,12 +35,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserDto> getAllUsers() {
+    public List<?> getAllUsers(Boolean detailed) {
+        if (detailed) {
+            return this.getAllUsersDetailed();
+        } else {
+            return this.getAllUsersNoDetailed();
+        }
+    }
+
+    public List<UserDto> getAllUsersNoDetailed() {
         return userRepository.findAll().stream().map(userMapper::toUserDto).collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional(readOnly = true)
     public List<UserDetailedDto> getAllUsersDetailed() {
         return userRepository
                 .findAll()
