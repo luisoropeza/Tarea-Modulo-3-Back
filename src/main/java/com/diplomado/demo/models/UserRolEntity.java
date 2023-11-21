@@ -27,8 +27,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserRolEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_rol_sequence")
-    @SequenceGenerator(name = "user_rol_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_rol_id_seq")
+    @SequenceGenerator(name = "user_rol_id_seq", allocationSize = 1)
     private Long id;
     @Column(nullable = false)
     private Boolean active;

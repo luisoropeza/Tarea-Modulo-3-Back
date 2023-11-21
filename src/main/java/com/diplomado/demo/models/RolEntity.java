@@ -20,8 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RolEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_sequence")
-    @SequenceGenerator(name = "rol_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_id_seq")
+    @SequenceGenerator(name = "rol_id_seq", allocationSize = 1)
     private Long id;
     @Column(nullable = false, length = 100)
     private String name;
