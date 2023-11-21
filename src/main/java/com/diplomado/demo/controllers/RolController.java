@@ -30,7 +30,7 @@ public class RolController {
         return rolService.getRolById(id);
     }
 
-    @GetMapping(path = "/query")
+    @GetMapping(path = "/users")
     public List<UserDetailedWithRolResponse> getUserWithRolByName(@RequestParam("name") final String rol) {
         return rolService.getUserWithRolByName(rol);
     }
