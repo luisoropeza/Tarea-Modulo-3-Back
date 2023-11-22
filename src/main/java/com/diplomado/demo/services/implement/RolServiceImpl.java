@@ -68,7 +68,7 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public List<UserDetailedWithRolResponse> getUserWithRolByName(String name) {
+    public List<UserDetailedWithRolResponse> getUsersByRol(String name) {
         RolEntity rol = rolRepository.findByName(name);
         if (rol == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe un rol con ese nombre");

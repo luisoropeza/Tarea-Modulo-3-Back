@@ -32,7 +32,7 @@ public class RolController {
 
     @GetMapping(path = "/users")
     public List<UserDetailedWithRolResponse> getUserWithRolByName(@RequestParam("name") final String rol) {
-        return rolService.getUserWithRolByName(rol);
+        return rolService.getUsersByRol(rol);
     }
 
     @GetMapping

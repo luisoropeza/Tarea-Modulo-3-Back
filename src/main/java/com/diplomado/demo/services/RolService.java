@@ -17,5 +17,5 @@ public interface RolService {
 
     RolEntity updateRol(Long id, UpdateRolRequest dto);
 
-    List<UserDetailedWithRolResponse> getUserWithRolByName(String rol);
+    List<UserDetailedWithRolResponse> getUsersByRol(String rol);
 }
