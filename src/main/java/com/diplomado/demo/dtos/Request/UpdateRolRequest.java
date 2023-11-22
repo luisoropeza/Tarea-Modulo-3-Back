@@ -7,4 +7,4 @@ import lombok.Setter;
 @Setter
 public class UpdateRolRequest {
     private String name;
-}  
+}

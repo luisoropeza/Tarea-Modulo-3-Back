@@ -51,7 +51,7 @@ public class RolController {
     }
 
     @PutMapping(path = "/{id}")
-    public RolEntity updateRol(@PathVariable("id") final Long id, @RequestBody UpdateRolRequest rol){
+    public RolEntity updateRol(@PathVariable("id") final Long id, @RequestBody UpdateRolRequest rol) {
         return rolService.updateRol(id, rol);
     }
 }

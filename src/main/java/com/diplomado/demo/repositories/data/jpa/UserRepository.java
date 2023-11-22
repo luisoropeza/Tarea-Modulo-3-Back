@@ -7,5 +7,5 @@ import com.diplomado.demo.models.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    
+
 }
