@@ -15,7 +15,6 @@ import com.diplomado.demo.repositories.data.jdbc.RolJdbcRepository;
 import com.diplomado.demo.repositories.data.jpa.RolRepository;
 import com.diplomado.demo.repositories.data.jpa.UserRolRepository;
 import com.diplomado.demo.services.RolService;
-import com.diplomado.demo.services.mapper.RolMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -25,7 +24,6 @@ import lombok.AllArgsConstructor;
 public class RolServiceImpl implements RolService {
     private final RolRepository rolRepository;
     private final UserRolRepository userRolRepository;
-    private final RolMapper rolMapper;
     private final RolJdbcRepository rolJdbcRepository;
 
     @Override
@@ -53,8 +51,8 @@ public class RolServiceImpl implements RolService {
     public void deleteRolById(Long id) {
         RolEntity rol = rolRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol"));
-        List<UserRolEntity> roles = userRolRepository.findAllByRol(rol);
-        if (!roles.isEmpty()) {
+        List<UserRolEntity> userRoles = userRolRepository.findAllByRol(rol);
+        if (!userRoles.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "El rol esta asignado a uno o mas usuarios.");
         }
@@ -65,7 +63,8 @@ public class RolServiceImpl implements RolService {
     public RolEntity updateRol(Long id, UpdateRolRequest dto) {
         RolEntity rol = rolRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol"));
-        return rolRepository.save(rolMapper.rolUpdate(rol, dto));
+        rol.setName(dto.getName());
+        return rolRepository.save(rol);
     }
 
     @Override

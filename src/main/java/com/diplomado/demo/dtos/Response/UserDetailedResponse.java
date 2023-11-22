@@ -1,4 +1,4 @@
-package com.diplomado.demo.dtos;
+package com.diplomado.demo.dtos.Response;
 
 import java.sql.Date;
 
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailedDto {
+public class UserDetailedResponse {
     private Long id;
     private String username;
     private String password;

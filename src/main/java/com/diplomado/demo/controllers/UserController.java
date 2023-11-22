@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.diplomado.demo.dtos.UserDetailedDto;
 import com.diplomado.demo.dtos.Request.AssignRolesToUserRequest;
 import com.diplomado.demo.dtos.Request.CreateUserWithRolesRequest;
 import com.diplomado.demo.dtos.Request.UpdateUserRequest;
 import com.diplomado.demo.dtos.Request.UpdateUserRolActiveRequest;
+import com.diplomado.demo.dtos.Response.UserDetailedResponse;
 import com.diplomado.demo.services.UserRolService;
 import com.diplomado.demo.services.UserService;
 
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDetailedDto createUser(@RequestBody final CreateUserWithRolesRequest dto) {
+    public UserDetailedResponse createUser(@RequestBody final CreateUserWithRolesRequest dto) {
         return userService.createUser(dto);
     }
 
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping(path = "/{id}")
-    public UserDetailedDto editUserById(@PathVariable("id") final Long id,
+    public UserDetailedResponse editUserById(@PathVariable("id") final Long id,
             @RequestBody final UpdateUserRequest dto) {
         return userService.editUserById(id, dto);
     }

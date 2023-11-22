@@ -8,7 +8,7 @@ import com.diplomado.demo.models.UserRolEntity;
 
 @Component
 public class UserRolMapper {
-    public UserRolEntity toUserRolEntity(RolEntity rol, UserEntity user){
+    public UserRolEntity toUserRolEntity(RolEntity rol, UserEntity user) {
         UserRolEntity userRol = new UserRolEntity();
         userRol.setUser(user);
         userRol.setRol(rol);

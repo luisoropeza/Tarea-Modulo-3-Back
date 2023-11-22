@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.diplomado.demo.dtos.UserDetailedDto;
-import com.diplomado.demo.dtos.UserDto;
 import com.diplomado.demo.dtos.Request.CreateUserWithRolesRequest;
 import com.diplomado.demo.dtos.Request.UpdateUserRequest;
+import com.diplomado.demo.dtos.Response.UserResponse;
+import com.diplomado.demo.dtos.Response.UserDetailedResponse;
 import com.diplomado.demo.models.UserDetailEntity;
 import com.diplomado.demo.models.UserEntity;
 import com.diplomado.demo.models.UserRolEntity;
@@ -43,30 +43,31 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public List<UserDto> getAllUsersNoDetailed() {
-        return userRepository.findAll().stream().map(userMapper::toUserDto).collect(Collectors.toList());
+    public List<UserResponse> getAllUsersNoDetailed() {
+        return userRepository.findAll().stream().map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
-    public List<UserDetailedDto> getAllUsersDetailed() {
+    public List<UserDetailedResponse> getAllUsersDetailed() {
         return userRepository
                 .findAll()
                 .stream()
-                .map(userMapper::toUserDetailedDto)
+                .map(userMapper::toUserDetailedResponse)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserDetailedDto createUser(CreateUserWithRolesRequest dto) {
+    public UserDetailedResponse createUser(CreateUserWithRolesRequest dto) {
         UserEntity user = new UserEntity();
         if (dto.getFirstName() != null && dto.getLastName() != null) {
-            user = userRepository.save(userMapper.toUserEntity(dto));
+            user = userRepository.save(userMapper.userDetailCreate(dto));
         } else {
-            user = userRepository.save(userMapper.toUserEntity(userMapper.toUserDto(dto)));
+            user = userRepository.save(userMapper.userCreate(userMapper.toUserResponse(dto)));
         }
         if (dto.getRolesId() != null) {
             userRolService.assignRolesToUser(user.getId(), dto.getRolesId());
+
         }
-        return userMapper.toUserDetailedDto(user);
+        return userMapper.toUserDetailedResponse(user);
     }
 
     @Override
@@ -83,10 +84,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetailedDto editUserById(Long id, UpdateUserRequest dto) {
+    public UserDetailedResponse editUserById(Long id, UpdateUserRequest dto) {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el usuario"));
         UserDetailEntity userDetail = userDetailRepository.findByUser(user);
-        return userMapper.toUserDetailedDto(userRepository.save(userMapper.userUpdate(dto, user, userDetail)));
+        return userMapper.toUserDetailedResponse(userRepository.save(userMapper.userUpdate(dto, user, userDetail)));
     }
 }
