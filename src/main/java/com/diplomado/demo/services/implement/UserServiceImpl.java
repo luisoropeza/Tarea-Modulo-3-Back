@@ -58,7 +58,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetailedResponse createUser(CreateUserWithRolesRequest dto) {
         UserEntity user = new UserEntity();
-        if (dto.getFirstName() != null && dto.getLastName() != null) {
+        if (dto.getUsername() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EL Username no puede ser nulo");
+        }
+        if (dto.getPassword() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EL Password no puede ser nulo");
+        }
+        if (dto.getEmail() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EL Email no puede ser nulo");
+        }
+        if (dto.getFirstName() != null || dto.getLastName() != null) {
+            if (dto.getFirstName() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EL First Name no puede ser nulo");
+            }
+            if (dto.getLastName() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EL Last Name no puede ser nulo");
+            }
             user = userRepository.save(userMapper.userDetailCreate(dto));
         } else {
             user = userRepository.save(userMapper.userCreate(userMapper.toUserResponse(dto)));
