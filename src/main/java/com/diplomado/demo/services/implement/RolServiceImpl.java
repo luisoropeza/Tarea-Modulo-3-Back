@@ -42,7 +42,7 @@ public class RolServiceImpl implements RolService {
     @Override
     public RolEntity createRol(RolEntity rol) {
         if (rol.getName() == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "El nombre del rol no puede ser nulo");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre del rol no puede ser nulo");
         }
         return rolRepository.save(rol);
     }
