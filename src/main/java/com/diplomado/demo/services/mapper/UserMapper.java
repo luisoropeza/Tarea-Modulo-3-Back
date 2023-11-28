@@ -1,8 +1,5 @@
 package com.diplomado.demo.services.mapper;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import org.springframework.stereotype.Component;
 
 import com.diplomado.demo.dtos.Request.CreateUserWithRolesRequest;
@@ -65,14 +62,12 @@ public class UserMapper {
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
-        Date newBirthDay = (dto.getBirthDay() != null) ? addOneDay(dto.getBirthDay()) : dto.getBirthDay();
         user.setUserDetail(
-                new UserDetailEntity(dto.getFirstName(), dto.getLastName(), dto.getAge(), newBirthDay, user));
+                new UserDetailEntity(dto.getFirstName(), dto.getLastName(), dto.getAge(), dto.getBirthDay(), user));
         return user;
     }
 
     public UserEntity userUpdate(UpdateUserRequest dto, UserEntity user, UserDetailEntity userDetail) {
-        Date newBirthDay = (dto.getBirthDay() != null) ? addOneDay(dto.getBirthDay()) : dto.getBirthDay();
         user.setUsername(dto.getUsername());
         user.setPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
@@ -80,19 +75,12 @@ public class UserMapper {
             userDetail.setFirstName(dto.getFirstName());
             userDetail.setLastName(dto.getLastName());
             userDetail.setAge(dto.getAge());
-            userDetail.setBirthDay(newBirthDay);
+            userDetail.setBirthDay(dto.getBirthDay());
             user.setUserDetail(userDetail);
         } else {
             user.setUserDetail(
-                    new UserDetailEntity(dto.getFirstName(), dto.getLastName(), dto.getAge(), newBirthDay, user));
+                    new UserDetailEntity(dto.getFirstName(), dto.getLastName(), dto.getAge(), dto.getBirthDay(), user));
         }
         return user;
-    }
-
-    private Date addOneDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        return new Date(calendar.getTimeInMillis());
     }
 }

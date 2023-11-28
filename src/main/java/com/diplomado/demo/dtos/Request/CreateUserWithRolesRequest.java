@@ -1,6 +1,6 @@
 package com.diplomado.demo.dtos.Request;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Getter;
@@ -15,6 +15,6 @@ public class CreateUserWithRolesRequest {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Date birthDay;
+    private LocalDate birthDay;
     private List<Long> rolesId;
 }

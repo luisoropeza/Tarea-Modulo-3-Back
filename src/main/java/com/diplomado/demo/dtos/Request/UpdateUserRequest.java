@@ -1,6 +1,6 @@
 package com.diplomado.demo.dtos.Request;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +14,5 @@ public class UpdateUserRequest {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Date birthDay;
+    private LocalDate birthDay;
 }

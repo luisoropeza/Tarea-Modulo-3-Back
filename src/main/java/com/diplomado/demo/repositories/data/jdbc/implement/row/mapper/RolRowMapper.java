@@ -18,7 +18,7 @@ public class RolRowMapper implements RowMapper<UserDetailedWithRolResponse> {
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getInt("age"),
-                rs.getDate("birth_day"),
+                rs.getDate("birth_day").toLocalDate(),
                 rs.getString("name"));
     }
 }

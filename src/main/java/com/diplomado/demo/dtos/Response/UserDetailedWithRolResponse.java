@@ -1,6 +1,6 @@
 package com.diplomado.demo.dtos.Response;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +19,6 @@ public class UserDetailedWithRolResponse {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Date birthDay;
+    private LocalDate birthDay;
     private String rolName;
 }

@@ -1,6 +1,6 @@
 package com.diplomado.demo.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,12 +34,12 @@ public class UserDetailEntity {
     private String lastName;
     private Integer age;
     @Column(name = "birth_day")
-    private Date birthDay;
+    private LocalDate birthDay;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    public UserDetailEntity(String firstName, String lastName, Integer age, Date birthDay, UserEntity user) {
+    public UserDetailEntity(String firstName, String lastName, Integer age, LocalDate birthDay, UserEntity user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
